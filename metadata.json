@@ -1,0 +1,7 @@
+{
+  "name": "Mariscos El General",
+  "description": "A vibrant and modern website for Mariscos El General, a buzzy Sinaloa-style seafood cantina in Pasadena, TX, featuring online ordering, detailed menus, and customer reviews.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

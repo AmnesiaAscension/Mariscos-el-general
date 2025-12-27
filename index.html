@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mariscos El General | Authentic Sinaloa Flavor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Permanent+Marker&family=Spicy+Rice&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-mexicano: #D81B60;
+            --azul-maya: #00ACC1;
+            --calendula: #FFB300;
+            --chile-red: #E53935;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fffaf0;
+        }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-accent { font-family: 'Permanent Marker', cursive; }
+        .font-display { font-family: 'Spicy Rice', serif; }
+
+        /* Papel Picado Sway Animation */
+        @keyframes sway {
+            0% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+            100% { transform: rotate(-2deg); }
+        }
+        .papel-picado {
+            animation: sway 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        /* Talavera Tile Pattern */
+        .talavera-bg {
+            background-color: #fffaf0;
+            background-image:  
+                radial-gradient(#00ACC1 1px, transparent 0),
+                radial-gradient(#D81B60 1px, #fffaf0 0);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.05;
+        }
+
+        /* Serape Stripe Divider */
+        .serape-divider {
+            height: 12px;
+            background: linear-gradient(to right, 
+                #D81B60 15%, #E53935 15% 30%, #FFB300 30% 45%, 
+                #4CAF50 45% 60%, #00ACC1 60% 75%, #3F51B5 75% 90%, #D81B60 90%);
+        }
+
+        .loteria-card {
+            border: 8px solid #333;
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .loteria-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 16px 16px 0px var(--calendula);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden selection:bg-[#D81B60] selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-6 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="flex-shrink-0 group">
+                    <h1 id="logo-text" class="text-2xl md:text-4xl font-display text-white transition-colors">
+                        MARISCOS <span class="text-[#FFB300]">EL GENERAL</span>
+                    </h1>
+                </a>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#home" class="nav-link text-sm font-black uppercase tracking-tighter text-white hover:text-[#FFB300] transition-colors">Home</a>
+                        <a href="#menu" class="nav-link text-sm font-black uppercase tracking-tighter text-white hover:text-[#FFB300] transition-colors">Menu</a>
+                        <a href="#about" class="nav-link text-sm font-black uppercase tracking-tighter text-white hover:text-[#FFB300] transition-colors">Vibe</a>
+                        <a href="#contact" class="nav-link text-sm font-black uppercase tracking-tighter text-white hover:text-[#FFB300] transition-colors">Visit Us</a>
+                        <a href="https://facebook.com" target="_blank" class="bg-[#D81B60] text-white px-8 py-3 rounded-xl font-black text-sm flex items-center gap-2 hover:bg-[#E53935] transition-all transform hover:-rotate-1 shadow-lg">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i> ORDER ONLINE
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:hidden">
+                    <button onclick="toggleMenu()" id="menu-btn" class="p-2 rounded-lg text-white">
+                        <i data-lucide="menu" id="menu-icon" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-[#D81B60] text-white shadow-2xl">
+            <div class="px-6 py-10 space-y-4">
+                <a href="#home" onclick="toggleMenu()" class="block w-full text-left text-3xl font-display border-b border-white/20 pb-4">Home</a>
+                <a href="#menu" onclick="toggleMenu()" class="block w-full text-left text-3xl font-display border-b border-white/20 pb-4">Menu</a>
+                <a href="#about" onclick="toggleMenu()" class="block w-full text-left text-3xl font-display border-b border-white/20 pb-4">Vibe</a>
+                <a href="#contact" onclick="toggleMenu()" class="block w-full text-left text-3xl font-display border-b border-white/20 pb-4">Visit Us</a>
+                <a href="https://facebook.com" class="block w-full bg-[#FFB300] text-blue-950 text-center py-6 rounded-2xl font-black text-xl shadow-xl">ORDER NOW</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Papel Picado -->
+        <div class="absolute top-0 left-0 right-0 flex justify-around overflow-hidden pointer-events-none z-40 px-2 opacity-90">
+            <div class="papel-picado w-16 h-20 md:w-24 md:h-28 flex-shrink-0 -mt-2" style="background-color: #D81B60; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%);"></div>
+            <div class="papel-picado w-16 h-20 md:w-24 md:h-28 flex-shrink-0 -mt-2" style="background-color: #00ACC1; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%); animation-delay: 0.2s"></div>
+            <div class="papel-picado w-16 h-20 md:w-24 md:h-28 flex-shrink-0 -mt-2" style="background-color: #FFB300; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%); animation-delay: 0.4s"></div>
+            <div class="papel-picado w-16 h-20 md:w-24 md:h-28 flex-shrink-0 -mt-2" style="background-color: #E53935; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%); animation-delay: 0.6s"></div>
+            <div class="papel-picado w-16 h-20 md:w-24 md:h-28 flex-shrink-0 -mt-2" style="background-color: #4CAF50; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%); animation-delay: 0.8s"></div>
+            <div class="papel-picado w-16 h-20 md:w-24 md:h-28 flex-shrink-0 -mt-2" style="background-color: #D81B60; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%); animation-delay: 1.0s"></div>
+            <div class="papel-picado w-16 h-20 md:w-24 md:h-28 flex-shrink-0 -mt-2" style="background-color: #00ACC1; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%); animation-delay: 1.2s"></div>
+            <div class="papel-picado w-16 h-20 md:w-24 md:h-28 flex-shrink-0 -mt-2" style="background-color: #FFB300; clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 50% 100%, 0% 80%); animation-delay: 1.4s"></div>
+        </div>
+
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?auto=format&fit=crop&q=80&w=2000" alt="Sinaloa Seafood Platter" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-[#D81B60]/80"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div class="inline-block bg-[#FFB300] px-6 py-2 rounded-full text-blue-950 font-black text-sm uppercase tracking-widest mb-6 shadow-xl animate-bounce">
+                WELCOME TO THE FIESTA!
+            </div>
+            <h1 class="text-7xl md:text-[10rem] font-display text-white mb-4 leading-[0.85] tracking-tighter drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+                Pure Sinaloa <br>
+                <span class="text-[#FFB300] italic">Flavor</span>
+            </h1>
+            <p class="text-xl md:text-3xl text-white mb-10 max-w-3xl mx-auto font-bold">
+                Fresh seafood, live music, and the best atmosphere in Pasadena. 
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#menu" class="w-full sm:w-auto px-12 py-6 bg-white text-[#D81B60] rounded-[2rem] font-black text-2xl hover:bg-[#FFB300] hover:text-blue-950 transition-all transform hover:scale-105 shadow-2xl flex items-center justify-center gap-3">
+                    VIEW MENU <i data-lucide="flame" class="w-8 h-8"></i>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-12 py-6 border-4 border-white text-white rounded-[2rem] font-black text-2xl hover:bg-white/10 transition-all flex items-center justify-center gap-3">
+                    GET DIRECTIONS <i data-lucide="map-pin" class="w-8 h-8"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 left-0 right-0 z-20">
+            <div class="serape-divider"></div>
+        </div>
+    </section>
+
+    <!-- Vibe/About Section -->
+    <section id="about" class="py-32 bg-[#00ACC1] relative overflow-hidden">
+        <div class="talavera-bg absolute inset-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2 order-2 lg:order-1">
+                    <h2 class="text-6xl md:text-8xl font-display text-white mb-8 leading-none rotate-[-1deg]">
+                        Colors, <br><span class="text-[#FFB300]">Music</span> & Friends
+                    </h2>
+                    <div class="space-y-8 text-white/90 text-2xl font-medium leading-relaxed">
+                        <p class="font-accent text-3xl text-[#FFB300]">Have you seen our chairs?</p>
+                        <p>
+                            Inspired by the street markets of Mexico, our restaurant glows with vibrant colored chairs, sky-blue walls, and floral garlands hanging from our industrial ceiling. 
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12">
+                            <div class="flex items-center gap-4 bg-white/10 p-6 rounded-3xl border-2 border-white/20">
+                                <i data-lucide="music" class="w-12 h-12 text-[#FFB300]"></i>
+                                <div>
+                                    <h4 class="font-black text-2xl">Weekend Live</h4>
+                                    <p class="text-sm opacity-80 uppercase font-black">Live Bands</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 bg-white/10 p-6 rounded-3xl border-2 border-white/20">
+                                <i data-lucide="waves" class="w-12 h-12 text-[#FFB300]"></i>
+                                <div>
+                                    <h4 class="font-black text-2xl">100% Fresh</h4>
+                                    <p class="text-sm opacity-80 uppercase font-black">Culiacán Style</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 order-1 lg:order-2">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-[#FFB300] rounded-[3rem] rotate-2 shadow-2xl"></div>
+                        <div class="relative rounded-[3rem] overflow-hidden border-[12px] border-white shadow-2xl rotate-[-1deg]">
+                            <img src="https://images.unsplash.com/photo-1551248429-40975aa4de74?auto=format&fit=crop&q=80&w=1200" alt="Colorful Cantina Interior" class="w-full aspect-[4/5] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-10 left-10 text-white">
+                                <i data-lucide="sparkles" class="w-12 h-12 text-[#FFB300] mb-4"></i>
+                                <h3 class="text-4xl font-display tracking-tight">The Best Vibe</h3>
+                                <p class="font-black text-sm uppercase tracking-widest opacity-80">Pasadena, Texas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-32 bg-[#fffaf0] relative">
+        <div class="serape-divider absolute top-0 left-0 right-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="text-7xl md:text-9xl font-display text-[#D81B60] mb-6 tracking-tighter">The Menu</h2>
+                <p class="text-2xl font-bold text-slate-500 max-w-2xl mx-auto italic">
+                    "For everything bad, seafood. For everything good... also seafood!"
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Menu Item 1 -->
+                <div class="loteria-card bg-white p-6 rounded-none relative group cursor-pointer">
+                    <span class="absolute top-4 left-4 font-display text-4xl text-[#D81B60] opacity-20">1</span>
+                    <div class="h-64 mb-6 overflow-hidden bg-slate-100 border-4 border-slate-900">
+                        <img src="https://picsum.photos/seed/ceviche/400/300" alt="Ceviche de Camaron" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h3 class="text-3xl font-display text-slate-900 mb-2">Ceviche de Camaron</h3>
+                    <p class="text-slate-500 font-bold mb-6 italic">"Fresh shrimp marinated in lime juice with cucumber, onion, and serrano."</p>
+                    <div class="flex items-center justify-between border-t-4 border-slate-900 pt-6">
+                        <span class="text-3xl font-display text-[#D81B60]">$18.99</span>
+                        <div class="bg-[#00ACC1] text-white p-3 rounded-full"><i data-lucide="utensils-crossed" class="w-6 h-6"></i></div>
+                    </div>
+                </div>
+                <!-- Menu Item 2 -->
+                <div class="loteria-card bg-white p-6 rounded-none relative group cursor-pointer">
+                    <span class="absolute top-4 left-4 font-display text-4xl text-[#D81B60] opacity-20">2</span>
+                    <div class="h-64 mb-6 overflow-hidden bg-slate-100 border-4 border-slate-900">
+                        <img src="https://picsum.photos/seed/tacos/400/300" alt="Tacos de Pescado" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h3 class="text-3xl font-display text-slate-900 mb-2">Tacos de Pescado</h3>
+                    <p class="text-slate-500 font-bold mb-6 italic">"Ensenada-style beer-battered fish tacos with chipotle slaw."</p>
+                    <div class="flex items-center justify-between border-t-4 border-slate-900 pt-6">
+                        <span class="text-3xl font-display text-[#D81B60]">$14.99</span>
+                        <div class="bg-[#00ACC1] text-white p-3 rounded-full"><i data-lucide="utensils-crossed" class="w-6 h-6"></i></div>
+                    </div>
+                </div>
+                <!-- Menu Item 3 -->
+                <div class="loteria-card bg-white p-6 rounded-none relative group cursor-pointer">
+                    <span class="absolute top-4 left-4 font-display text-4xl text-[#D81B60] opacity-20">3</span>
+                    <div class="h-64 mb-6 overflow-hidden bg-slate-100 border-4 border-slate-900">
+                        <img src="https://picsum.photos/seed/aguachile/400/300" alt="Aguachile Verde" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <h3 class="text-3xl font-display text-slate-900 mb-2">Aguachile Verde</h3>
+                    <p class="text-slate-500 font-bold mb-6 italic">"Classic Sinaloa-style spicy green aguachile with red onions."</p>
+                    <div class="flex items-center justify-between border-t-4 border-slate-900 pt-6">
+                        <span class="text-3xl font-display text-[#D81B60]">$21.99</span>
+                        <div class="bg-[#00ACC1] text-white p-3 rounded-full"><i data-lucide="utensils-crossed" class="w-6 h-6"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visit Section -->
+    <section id="contact" class="py-32 bg-slate-900 text-white relative">
+        <div class="absolute inset-0 opacity-10 talavera-bg"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-[#D81B60] rounded-[4rem] overflow-hidden flex flex-col lg:flex-row shadow-[0_50px_100px_rgba(0,0,0,0.5)] border-[16px] border-[#D81B60]">
+                <div class="p-12 lg:p-20 flex-1 bg-white text-slate-900">
+                    <h2 class="text-6xl font-display text-[#D81B60] mb-12">Visit Us!</h2>
+                    <div class="space-y-12">
+                        <div class="flex items-start gap-8">
+                            <div class="bg-[#00ACC1] p-5 rounded-3xl text-white shadow-lg rotate-[-3deg]">
+                                <i data-lucide="map-pin" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-2xl uppercase tracking-tighter mb-2">Location</h4>
+                                <p class="text-xl font-bold opacity-70">2222 Spencer Hwy, Pasadena, TX 77504</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-8">
+                            <div class="bg-[#FFB300] p-5 rounded-3xl text-blue-950 shadow-lg rotate-[3deg]">
+                                <i data-lucide="phone" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-2xl uppercase tracking-tighter mb-2">Phone</h4>
+                                <a href="tel:8322808221" class="text-xl font-bold hover:text-[#D81B60] transition-colors">(832) 280-8221</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-8">
+                            <div class="bg-[#E53935] p-5 rounded-3xl text-white shadow-lg rotate-[-2deg]">
+                                <i data-lucide="clock" class="w-10 h-10"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-black text-2xl uppercase tracking-tighter mb-2">Hours</h4>
+                                <p class="text-xl font-bold opacity-70">Daily: 11:00 AM - 2:00 AM</p>
+                                <p class="text-[#D81B60] font-black mt-2 text-sm bg-red-50 inline-block px-3 py-1 rounded-full uppercase">Open Late Every Night</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-16 pt-12 border-t-4 border-dashed border-slate-100">
+                        <button class="w-full bg-[#00ACC1] text-white font-black py-6 rounded-3xl text-2xl shadow-xl hover:bg-[#D81B60] transition-all transform hover:-translate-y-2">
+                            BOOK YOUR TABLE!
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 h-[500px] lg:h-auto relative grayscale hover:grayscale-0 transition-all duration-1000">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3467.502932822557!2d-95.1950462234559!3d29.64332857512702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86409890f5c88b05%3A0x7d6c6e76e5c5464!2s2222%20Spencer%20Hwy%2C%20Pasadena%2C%20TX%2077504!5e0!3m2!1sen!2sus!4v1715424000000!5m2!1sen!2sus" 
+                      class="w-full h-full border-none"
+                      allowfullscreen="" 
+                      loading="lazy" 
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-white py-20 relative overflow-hidden">
+        <div class="serape-divider absolute top-0 left-0 right-0"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20 items-center text-center md:text-left">
+                <div>
+                    <h3 class="text-5xl font-display mb-6 text-[#FFB300]">El General</h3>
+                    <p class="text-xl opacity-60 font-medium italic">
+                        "Where seafood becomes a party."
+                    </p>
+                </div>
+                
+                <div class="flex flex-col items-center">
+                    <h4 class="font-black uppercase tracking-widest text-sm mb-8 opacity-50">Follow Us</h4>
+                    <div class="flex gap-8">
+                        <a href="#" class="w-16 h-16 bg-[#D81B60] rounded-full flex items-center justify-center hover:scale-110 transition-all"><i data-lucide="instagram" class="w-8 h-8"></i></a>
+                        <a href="#" class="w-16 h-16 bg-[#00ACC1] rounded-full flex items-center justify-center hover:scale-110 transition-all"><i data-lucide="facebook" class="w-8 h-8"></i></a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:items-end">
+                    <p class="text-sm opacity-50 font-black mb-4 uppercase">Live Music</p>
+                    <p class="text-xl font-bold text-[#FFB300]">FRIDAY, SATURDAY & SUNDAY</p>
+                    <p class="text-sm opacity-50 font-black mt-8 uppercase tracking-widest">2222 Spencer Hwy, Pasadena</p>
+                </div>
+            </div>
+            
+            <div class="pt-10 border-t border-white/10 flex flex-col md:row-reverse md:flex-row justify-between items-center opacity-40 text-xs font-black tracking-widest uppercase">
+                <p>© 2024 MARISCOS EL GENERAL. LGBTQ+ FRIENDLY 🏳️‍🌈</p>
+                <div class="flex gap-8 mt-4 md:mt-0">
+                    <a href="#">PRIVACY</a>
+                    <a href="#">TERMS</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Logic
+        window.onscroll = function() {
+            const navbar = document.getElementById("navbar");
+            const logoText = document.getElementById("logo-text");
+            const menuBtn = document.getElementById("menu-btn");
+            const navLinks = document.querySelectorAll(".nav-link");
+
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                navbar.classList.add("bg-white", "shadow-xl", "py-2");
+                navbar.classList.remove("bg-transparent", "py-6");
+                logoText.classList.add("text-[#D81B60]");
+                logoText.classList.remove("text-white");
+                menuBtn.classList.add("text-[#D81B60]");
+                menuBtn.classList.remove("text-white");
+                navLinks.forEach(link => {
+                    link.classList.add("text-slate-800");
+                    link.classList.remove("text-white");
+                });
+            } else {
+                navbar.classList.add("bg-transparent", "py-6");
+                navbar.classList.remove("bg-white", "shadow-xl", "py-2");
+                logoText.classList.add("text-white");
+                logoText.classList.remove("text-[#D81B60]");
+                menuBtn.classList.add("text-white");
+                menuBtn.classList.remove("text-[#D81B60]");
+                navLinks.forEach(link => {
+                    link.classList.add("text-white");
+                    link.classList.remove("text-slate-800");
+                });
+            }
+        };
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById("mobile-menu");
+            const icon = document.getElementById("menu-icon");
+            menu.classList.toggle("active");
+            
+            if (menu.classList.contains("active")) {
+                icon.setAttribute("data-lucide", "x");
+            } else {
+                icon.setAttribute("data-lucide", "menu");
+            }
+            lucide.createIcons();
+        }
+    </script>
+</body>
+</html>
